@@ -67,7 +67,7 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
                     <img className="cart__empty--img" src={EmptyCart} alt="" />
                     <h2>You don't have any cards in your cart!</h2>
                     <Link to="/books">
-                      <button className="btn">Browse books</button>
+                      <button className="btn">Browse Cards</button>
                     </Link>
                   </div>
                 )}
