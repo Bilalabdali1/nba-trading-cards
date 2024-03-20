@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import EmptyCart from "../assets/empty_cart.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Cart = ({ cart, updateCart, removeItem, totals }) => {
   return (
@@ -39,7 +40,7 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
                             className="cart__book--remove"
                             onClick={() => removeItem(item)}
                           >
-                            Remove
+                        <FontAwesomeIcon icon="fa-solid fa-x" />Remove
                           </button>
                         </div>
                       </div>

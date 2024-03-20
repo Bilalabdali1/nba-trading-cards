@@ -13,7 +13,7 @@ function Highlights() {
             <Highlight
               icon={<FontAwesomeIcon icon="bolt" />}
               title="Easy and Quick"
-              para="Get access to the book you purchased online instantly."
+              para="Get access to the cards you purchased online instantly."
             ></Highlight>
             <Highlight
               icon={<FontAwesomeIcon icon="book-open" />}

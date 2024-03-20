@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CardLogo from "../assets/BasketballLogo.png";
 import { Link } from "react-router-dom";
 function Nav({numberOfItems}) {
-  console.log(numberOfItems)
   function openMenu(){
     document.body.classList+=" menu--open"
   }
@@ -21,7 +20,7 @@ function Nav({numberOfItems}) {
             </Link>
           </li>
           <li className="nav__list">
-            <Link to="/Books" className="nav__link nav__link--primary">
+            <Link to="/Books" className="nav__link">
               Cards
             </Link>
           </li>
@@ -44,13 +43,13 @@ function Nav({numberOfItems}) {
      </button>
  <ul className="menu__links"> 
      <li className="menu__list">
-     <Link to="/" className="menu__link">Home</Link>
+     <Link to="/" className="menu__link" onClick={closeMenu} >Home</Link>
      </li>
        <li className="menu__list">
-     <Link to="/books" className="menu__link">Cards</Link>
+     <Link to="/books" className="menu__link" onClick={closeMenu}>Cards</Link>
      </li>
        <li className="menu__list">
-     <Link to="/cart" className="menu__link">Cart</Link>
+     <Link to="/cart" className="menu__link" onClick={closeMenu}>Cart</Link>
      </li>
      </ul>
      </div>

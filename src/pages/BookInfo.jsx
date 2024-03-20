@@ -1,17 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState,useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/ui/Rating";
 import Price from "../components/ui/Price";
 import Book from "../components/ui/book";
- 
-function BookInfo({ books,addItemToCart }) {
-
+import CartAdded from "../components/ui/CartAdded";
+ import BestCards from "../components/BestCards";
+function BookInfo({ books,addItemToCart,added,cart }) {
      const {id}=useParams();
     const book=books.find(book=>book.id==id)
+    function bookExistinCart(){
+  const dupe=cart.find((item) => item.id === book.id);
+    console.log(dupe)
+  return dupe
+ 
+}
+ bookExistinCart()
   return (
+    
     <div id="books__body">
       <main id="books__main">
         <div className="books__container">
@@ -50,7 +57,7 @@ function BookInfo({ books,addItemToCart }) {
 
                 {
                    
-                  false ? <button className="btn">Checkout</button> :  <button className="btn" onClick={()=>addItemToCart(book)}>
+                  bookExistinCart() ? <button className="btn"><Link to="/cart" className="btn__link">Checkout</Link></button> :  <button className="btn" onClick={()=>{addItemToCart(book);}}>
                   Add to Cart
                 </button>
                 }
@@ -66,14 +73,8 @@ function BookInfo({ books,addItemToCart }) {
               <h2 className="book__selected--title--top">Recommended Cards</h2>
               </div>
             <div className="books">
-            {books.filter((book)=>
-                book.rating===5 && book.id !=id
-            )
-            .map((book)=>(
-                <Book book={book} key={book.id}></Book>
-            ))
-            .slice(0,4)
-            }
+            <BestCards  id={id} books={books}></BestCards>
+           
             </div>
             
              

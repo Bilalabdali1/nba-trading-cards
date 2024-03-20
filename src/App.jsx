@@ -20,6 +20,7 @@ import {
   faStar,
   faStarHalfAlt,
   faArrowLeft,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faBars,
@@ -31,9 +32,10 @@ library.add(
   faStar,
   faStarHalfAlt,
   faArrowLeft,
+  faX
 );
 function App() {
-  
+    const [added, setAdded] = useState(false);
     const [cart,setCart]=useState([])
     function changeQuanity(book,quantity){
       setCart(cart.map(item=>{
@@ -41,6 +43,7 @@ function App() {
     return{
       ...item,
       quantity:+quantity,
+      
     }
   }
   else{
@@ -66,13 +69,7 @@ function App() {
     return counter;
   }
  
-  function numberOfItems() {
-    let counter = 0;
-    cart.forEach((item) => {
-      counter += +item.quantity;
-    });
-    return counter;
-  }
+  
 function updateCart(item, newQuantity) {
     setCart((oldCart) =>
       oldCart.map((oldItem) => {
@@ -114,9 +111,12 @@ function addItemToCart(book) {
                   }
                 : item;
             }),
+            
           ]
         : [...oldCart, { ...book, quantity: 1 }]
+        
     );
+     setAdded(true)
   }
 useEffect(()=>{
   console.log(cart)
@@ -129,7 +129,7 @@ useEffect(()=>{
         <Routes>
           <Route path="/" Component={Home}></Route>
         <Route path="/books" Component={() => <Books books={books} />} />
-        <Route path="/books/:id" Component={() => (<BookInfo books={books} addItemToCart={addItemToCart} key={books.id}/>)}></Route>
+        <Route path="/books/:id" Component={() => (<BookInfo books={books} addItemToCart={addItemToCart} key={books.id} cart={cart}/>)}></Route>
         <Route path="/cart" Component={() => <Cart cart={cart}
               updateCart={updateCart}
               removeItem={removeItem}

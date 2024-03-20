@@ -114,7 +114,7 @@ export const books = [
         title: "2018 Panini Optic LUKA DONCIC #177 RC",
         url: "https://i.ebayimg.com/images/g/a7sAAOSwC6JjZWvn/s-l300.jpg",
         originalPrice: 45.55,
-        salePrice: 40,
+        salePrice: 41.15,
         rating: 3.5,
         summary1: "Luka Doncic's 2018 rookie card from Panini Optic is graded 3.5 by PSA, representing a solid collectible of the NBA star.",
         summary2: "Initially valued at $45.55, the card is currently priced at $40, indicating steady demand and interest among collectors."
