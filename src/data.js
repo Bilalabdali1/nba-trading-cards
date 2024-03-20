@@ -31,7 +31,7 @@ export const books = [
     },
     {
         id: 4,
-        title: "2019 KAWHI LEONARD RAPTORS PSA 9",
+        title: "KAWHI LEONARD RAPTORS PSA 9 2019",
         url: "https://i.ebayimg.com/images/g/CvgAAOSweyllW9SO/s-l1600.jpg",
         originalPrice: 50.99,
         salePrice: 34.99,

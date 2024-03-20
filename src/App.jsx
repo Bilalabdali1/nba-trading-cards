@@ -56,6 +56,7 @@ function App() {
 
       console.log(book.quantity)
     }
+    
     function removeItem(item) {
     setCart((oldCart) => oldCart.filter((cartItem) => cartItem.id !== item.id));
   }
@@ -85,7 +86,20 @@ function updateCart(item, newQuantity) {
     );
   }
 
-
+function updateSmallCart(item, newQuantity) {
+    setCart((oldCart) =>
+      oldCart.map((oldItem) => {
+        if (oldItem.id === item.id) {
+          return {
+            ...oldItem,
+            quantity: newQuantity,
+          };
+        } else {
+          return oldItem;
+        }
+      })
+    );
+  }
   function calcPrices() {
     let total = 0;
     cart.forEach((item) => {
@@ -129,7 +143,7 @@ useEffect(()=>{
         <Routes>
           <Route path="/" Component={Home}></Route>
         <Route path="/books" Component={() => <Books books={books} />} />
-        <Route path="/books/:id" Component={() => (<BookInfo books={books} addItemToCart={addItemToCart} key={books.id} cart={cart}/>)}></Route>
+        <Route path="/books/:id" Component={() => (<BookInfo books={books} addItemToCart={addItemToCart} key={books.id} cart={cart} removeItem={removeItem} totals={calcPrices()} updateSmallCart={updateSmallCart}/> )}></Route>
         <Route path="/cart" Component={() => <Cart cart={cart}
               updateCart={updateCart}
               removeItem={removeItem}

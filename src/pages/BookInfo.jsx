@@ -1,25 +1,39 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Offcanvas from 'react-bootstrap/Offcanvas';
+
 import { useEffect, useState,useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/ui/Rating";
 import Price from "../components/ui/Price";
 import Book from "../components/ui/book";
+import CartAdded from "../components/ui/CartAdded";
  import BestCards from "../components/BestCards";
-function BookInfo({ books,addItemToCart,added,cart }) {
+function BookInfo({ books,addItemToCart,added,cart,totals,updateSmallCart,removeItem }) {
      const {id}=useParams();
     const book=books.find(book=>book.id==id)
     function bookExistinCart(){
   const dupe=cart.find((item) => item.id === book.id);
     console.log(dupe)
   return dupe
- 
 }
- bookExistinCart()
+function bilal(item, event){
+   updateSmallCart(item, event.target.value)
+   setShow()
+}
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+    console.log(setShow)
+  }
+  const handleShow = () => {
+    setShow(true);
+    console.log(show)
+  } 
   return (
     <div id="books__body">
       <main id="books__main">
-       <div className="container"> 
         <div className="books__container">
           <div className="row">
             <div className="book__selected--top">
@@ -55,12 +69,14 @@ function BookInfo({ books,addItemToCart,added,cart }) {
                 </div>
                 {
                    
-                  bookExistinCart() ? <button className="btn"><Link to="/cart" className="btn__link">Checkout</Link></button> :  <button className="btn" onClick={()=>{addItemToCart(book);}}>
+                  bookExistinCart() ? <button className="btn" onClick={handleShow}>  Checkout</button> :  <button className="btn" onClick={()=>{addItemToCart(book);}}>
                   Add to Cart
                 </button>
                 }
-                {}
                
+                   
+      {/* {bookExistinCart() ? <button className="btn" onClick={handleShow}>  Checkout</button> : null} */}
+                
               </div>
             </div>
           </div>
@@ -80,10 +96,99 @@ function BookInfo({ books,addItemToCart,added,cart }) {
            
           </div>
         </div>
+              <Offcanvas show={show} onHide={handleClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>My Cart</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <div id="books__body">
+      <main id="books__main">
+        <div className="books__container">
+          <div className="row">
+            <div className="cart">
+              <div className="cart__header">
+                <span className="cart__book">Card</span>
+              </div>
+              <div className="cart__body">
+                {cart.map((item) => {
+                  const itemPrice = item.salePrice || item.originalPrice;
+                  return (
+                    <div className="cart__item" key={item.id}>
+                      <div className="cart__book1">
+                        <img
+                          className="cart__book--img"
+                          src={item.url}
+                          alt=""
+                        />
+                         <button
+                            className="cart__book--remove"
+                            onClick={() => removeItem(item)}
+                          >
+                        <FontAwesomeIcon icon="fa-solid fa-x" />
+                          </button>
+
+                        <div className="cart__book--info">
+                          <span className="cart__book--title1">
+                            {item.title}
+                          </span>
+                          <span className="cart__book--price1">
+                            ${itemPrice.toFixed(2)}
+                                               
+
+                          </span>
+                        
+                          <input
+                          type="number"
+                          className="cart__input"
+                          min={0}
+                          max={10}
+                          defaultValue={item.quantity}
+                          onChange={(event) =>
+                          
+                            bilal(item, event)
+                          }
+                          />
+                        </div>
+                      </div>
+                  
+           
+                    </div>
+                  );
+                })}
+                <div className="total">
+                <div className="total__item total__sub-total">
+                  <span>Subtotal</span>
+                  <span>${totals.subtotal.toFixed(2)}</span>
                 </div>
+                <div className="total__item total__tax">
+                  <span>Tax</span>
+                  <span>${totals.tax.toFixed(2)}</span>
+                </div>
+                <div className="total__item total__price">
+                  <span>Total</span>
+                  <span>${totals.total.toFixed(2)}</span>
+                </div>
+  
+              </div>
+                <div className="btn_contain"> 
+                <Link to="/cart">
+                      <button className="btn">View Cart</button>
+                    </Link>
+                    </div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+      </main>
+    </div>
+
+        </Offcanvas.Body>
+      </Offcanvas>
 
       </main>
     </div>
+    
   );
 
 }

@@ -50,6 +50,7 @@ a:hover {
 
 ul {
   display: flex;
+  margin-bottom: 0rem
 }
 
 li {
@@ -88,6 +89,8 @@ button:active {
 }
 .btn:hover{
   transform: scale(1.05);
+  background-color: #162b69;
+  color: white;
 }
 .btn__wrapper{
   display: flex;
@@ -690,7 +693,10 @@ select {
   width: 60%;
   display: flex;
 }
-
+.cart__book1 {
+  width: 100%;
+  display: flex;
+}
 .cart__quantity {
   width: 40%;
   display: flex;
@@ -729,11 +735,23 @@ select {
   font-size: 20px;
   margin-bottom: 16px;
 }
-
+.cart__book--title1 {
+  font-size: 14px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
 .cart__book--price {
   margin-bottom: 16px;
 }
+.cart__book--price1{
+  font-size: 14px;
 
+}
+.btn_contain{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .cart__book--remove {
   background-color: transparent;
   color: #cf0000;
