@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import Rating from "../components/ui/Rating";
 import Price from "../components/ui/Price";
 import Book from "../components/ui/book";
-import CartAdded from "../components/ui/CartAdded";
  import BestCards from "../components/BestCards";
 function BookInfo({ books,addItemToCart,added,cart }) {
      const {id}=useParams();
@@ -18,9 +17,9 @@ function BookInfo({ books,addItemToCart,added,cart }) {
 }
  bookExistinCart()
   return (
-    
     <div id="books__body">
       <main id="books__main">
+       <div className="container"> 
         <div className="books__container">
           <div className="row">
             <div className="book__selected--top">
@@ -54,7 +53,6 @@ function BookInfo({ books,addItemToCart,added,cart }) {
                   {book.summary2}
                   </p>
                 </div>
-
                 {
                    
                   bookExistinCart() ? <button className="btn"><Link to="/cart" className="btn__link">Checkout</Link></button> :  <button className="btn" onClick={()=>{addItemToCart(book);}}>
@@ -67,6 +65,7 @@ function BookInfo({ books,addItemToCart,added,cart }) {
             </div>
           </div>
         </div>
+
         <div className="books__container">
           <div className="row">
             <div className="book__selected--top">
@@ -81,6 +80,8 @@ function BookInfo({ books,addItemToCart,added,cart }) {
            
           </div>
         </div>
+                </div>
+
       </main>
     </div>
   );
