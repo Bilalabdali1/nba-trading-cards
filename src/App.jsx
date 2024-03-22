@@ -77,7 +77,7 @@ function updateCart(item, newQuantity) {
         if (oldItem.id === item.id) {
           return {
             ...oldItem,
-            quantity: newQuantity,
+            quantity: parseInt(newQuantity),
           };
         } else {
           return oldItem;
@@ -92,7 +92,7 @@ function updateSmallCart(item, newQuantity) {
         if (oldItem.id === item.id) {
           return {
             ...oldItem,
-            quantity: newQuantity,
+            quantity: parseInt(newQuantity),
           };
         } else {
           return oldItem;

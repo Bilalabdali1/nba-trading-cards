@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer>
       <div className="container">
-        <div className="row row__column">
+        <div className="row1 row__column">
           <Link to="/">
             <figure className="footer__logo">
               <img src={logo} alt="" className="footer__logo--img" />

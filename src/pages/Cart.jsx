@@ -2,8 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import EmptyCart from "../assets/empty_cart.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = ({ cart, updateCart, removeItem, totals }) => {
+  const redirectToCheckout = async () => {
+    const stripe = await loadStripe('pk_test_51Ovo0GDH16DQa3RUI27zpTHUDIItjatyTGv7UGkuHM2bDgbjvW0T7zxo5GcvUoYq1lO8Sm4IQrNKhQ06Lzf6I9gE00a6BYfFeB');
+    
+    // Prepare line items for Stripe Checkout
+    const lineItems = cart.map(item => ({
+      price: item.stripeID, // Replace with the Stripe price ID for your product
+      quantity: item.quantity
+    }));
+
+    // Redirect to Stripe Checkout
+    const { error } = await stripe.redirectToCheckout({
+      lineItems,
+      mode: 'payment',
+      successUrl: 'http://localhost:3000/', // URL to redirect to after successful payment
+      cancelUrl: 'http://localhost:3000/', // URL to redirect to if payment is canceled
+    });
+
+    // Handle any errors
+    if (error) {
+      console.error('Error redirecting to checkout:', error);
+    }
+  };
+
   return (
     <div id="books__body">
       <main id="books__main">
@@ -40,7 +64,7 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
                             className="cart__book--remove"
                             onClick={() => removeItem(item)}
                           >
-                        <FontAwesomeIcon icon="fa-solid fa-x" />Remove
+                            <FontAwesomeIcon icon="fa-solid fa-x" />Remove
                           </button>
                         </div>
                       </div>
@@ -62,7 +86,6 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
                     </div>
                   );
                 })}
-                {/* {(!cart || !cart.length) && <img src={EmptyCart}/>} */}
                 {(!cart || !cart.length) && (
                   <div className="cart__empty">
                     <img className="cart__empty--img" src={EmptyCart} alt="" />
@@ -88,7 +111,7 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
                   <span>Total</span>
                   <span>${totals.total.toFixed(2)}</span>
                 </div>
-                <button className="btn btn__checkout no-cursor" onClick={() => alert(`Haven't got around to doing this :(`)}>
+                <button className="btn btn__checkout" onClick={redirectToCheckout}>
                   Proceed to checkout
                 </button>
               </div>
@@ -101,4 +124,3 @@ const Cart = ({ cart, updateCart, removeItem, totals }) => {
 };
 
 export default Cart;
-

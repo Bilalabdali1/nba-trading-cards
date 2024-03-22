@@ -291,6 +291,11 @@ header {
   margin: 0 auto;
   padding: 0 24px;
 }
+.row1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
 .row__column {
   display: flex;
