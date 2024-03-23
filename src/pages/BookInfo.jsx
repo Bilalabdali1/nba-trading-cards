@@ -22,7 +22,9 @@ function bilal(item, event){
    setShow()
 }
   const [show, setShow] = useState(false);
-
+    useEffect(() => {
+        setShow(bookExistinCart());
+    }, [cart, book]); // Dependencies array includes cart and book
   const handleClose = () => {
     setShow(false);
     console.log(setShow)
